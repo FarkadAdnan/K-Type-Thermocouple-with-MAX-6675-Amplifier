@@ -50,7 +50,43 @@ When hooking up a thermocouple, the red lead of the thermocouple typically attac
 - SO  =     Serial Data Output.  Connect to any digital pin on MCU.
 ![Capture](https://user-images.githubusercontent.com/35774039/161411598-3a291d32-85aa-47c0-9566-25f5f87d3423.JPG)
 ![Capture1](https://user-images.githubusercontent.com/35774039/161411601-15024d14-8397-4c86-94d3-4a7d533ed8af.JPG)
+# Code Arduino
 
+```
+/*
+ By:Farkad Adnan
+ E-mail: farkad.hpfa95@gmail.com
+ inst : farkadadnan
+ #farkadadnan , #farkad_adnan , فرقد عدنان#
+ FaceBook: كتاب عالم الاردوينو
+ inst : arduinobook
+ #كتاب_عالم_الاردوينو  #كتاب_عالم_الآردوينو 
+ */
+#include "max6675.h"
+int thermoSO = 4; 
+int thermoCS = 5; 
+int thermoSCK = 6;  
+float temp1 = 0;
+MAX6675 thermocouple(thermoSCK, thermoCS, thermoSO);
+void setup() {
+  Serial.begin(9600); 
+   delay(500); 
+}
+void loop() {
+  temp1 = thermocouple.readCelsius();
+     Serial.println(temp1);               
+        if(temp1 < 40   ){
+          Serial.println("normal"); 
+        delay(1000);
+        } 
+        if(temp1 > 40)
+        {
+          Serial.println("High");
+           delay(1000);
+        } else 
+        delay(500);
+}
+```
 # MAX6675 Amplifier
 ![asa](https://user-images.githubusercontent.com/35774039/161411614-ff37ad06-506e-45fd-abed-36a93185d5be.JPG)
 - Usually, you can get a pack with a k-type thermocouple and the MAX6675 amplifier. Here’s a list of the MAX6675 most relevant features. For a more detailed description, please consult the  [MAX6675 datasheet](https://datasheets.maximintegrated.com/en/ds/MAX6675.pdf).
